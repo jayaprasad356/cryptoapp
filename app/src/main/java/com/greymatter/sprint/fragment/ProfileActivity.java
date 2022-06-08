@@ -1,6 +1,7 @@
 package com.greymatter.sprint.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -42,8 +43,21 @@ public class ProfileActivity extends AppCompatActivity {
         binding.stepHistory.setOnClickListener(view ->
                 startActivity(new Intent(getApplicationContext(), StepHistoryActivity.class)));
 
+        binding.instagram.setOnClickListener(view ->
+                openUrl(Constant.INSTAGRAM));
+        binding.telegram.setOnClickListener(view ->
+                openUrl(Constant.TELEGRAM));
+        binding.whatsapp.setOnClickListener(view ->
+                openUrl(Constant.WHATSAPP));
+
         binding.logout.setOnClickListener(view -> logout());
 
+    }
+
+    private void openUrl(String url) {
+        final Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET|Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        startActivity(intent);
     }
 
     private void initBottomNav() {
