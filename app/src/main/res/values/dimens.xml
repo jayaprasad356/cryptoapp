@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="et_radius">20dp</dimen>
+    <dimen name="horizontal_margin">20dp</dimen>
+    <dimen name="et_height">55dp</dimen>
+    <dimen name="et_padding">20dp</dimen>
+    <dimen name="vertical_spacing">15dp</dimen>
+    <dimen name="wallet_card_radius">12dp</dimen>
+</resources>

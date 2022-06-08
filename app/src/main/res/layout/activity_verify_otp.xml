@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SigninActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_margin="@dimen/horizontal_margin"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/logo"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="27sp"
+            android:text="Email Verification" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:textColor="@color/hint_color"
+            android:text="We sent a OTP to your mail " />
+
+        <in.aabhasjindal.otptextview.OtpTextView
+            android:layout_margin="30dp"
+            android:layout_gravity="center"
+            android:id="@+id/otp_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:height="55dp"
+            app:width="40dp"
+            app:bar_height="2dp"
+            app:length="6"
+            app:bar_enabled="true"
+            app:bar_active_color="@color/primary"
+            app:bar_inactive_color="@color/hint_color"
+            app:otp_text_size="27sp"/>
+
+        <LinearLayout
+            android:layout_margin="@dimen/vertical_spacing"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/open_sans"
+                android:textColor="@color/hint_color"
+                android:text="Didn't receive a code?" />
+
+            <TextView
+                android:id="@+id/resend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_medium"
+                android:text=" resend" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="30dp"
+            android:insetTop="3dp"
+            android:insetBottom="3dp"
+            android:text="Verify"
+            app:cornerRadius="@dimen/et_radius" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

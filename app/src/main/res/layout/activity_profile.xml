@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SigninActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/profile_avatar"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/primary" />
+
+        <TextView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/vertical_spacing"
+            android:text="Change profile"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="12sp"
+            android:textColor="@color/primary"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:background="@drawable/edittext_bg"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center_vertical"
+            android:hint="Full Name"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/et_padding"
+            android:singleLine="true"
+            android:textColorHint="@color/hint_color" />
+
+        <EditText
+            android:id="@+id/weight"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:background="@drawable/edittext_bg"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center_vertical"
+            android:hint="Weight in Kg"
+            android:inputType="number"
+            android:maxLength="3"
+            android:paddingStart="@dimen/et_padding"
+            android:singleLine="true"
+            android:textColorHint="@color/hint_color" />
+
+        <EditText
+            android:id="@+id/height"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:background="@drawable/edittext_bg"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center_vertical"
+            android:hint="Height in cm"
+            android:inputType="number"
+            android:maxLength="3"
+            android:paddingStart="@dimen/et_padding"
+            android:singleLine="true"
+            android:textColorHint="@color/hint_color" />
+
+        <EditText
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:background="@drawable/edittext_bg"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center_vertical"
+            android:hint="Age"
+            android:inputType="number"
+            android:maxLength="2"
+            android:paddingStart="@dimen/et_padding"
+            android:singleLine="true"
+            android:textColorHint="@color/hint_color" />
+
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="30dp"
+            android:insetTop="3dp"
+            android:insetBottom="3dp"
+            android:text="Update"
+            app:cornerRadius="@dimen/et_radius" />
+
+    </LinearLayout>
+
+</RelativeLayout>
