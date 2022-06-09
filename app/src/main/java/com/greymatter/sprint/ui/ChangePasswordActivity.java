@@ -61,7 +61,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         Call<LoginResponse> call = APIClient.getClientWithoutToken().changePassword(
                 MyFunction.getSharedPrefs(getApplicationContext(),Constant.USER_ID,""),
-                binding.password.getText().toString().trim()
+                binding.password.getText().toString().trim(),binding.oldPassword.getText().toString().trim()
                 );
         call.enqueue(new Callback<LoginResponse>() {
             @Override

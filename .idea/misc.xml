@@ -38,10 +38,12 @@
         <entry key="..\:/Android_Projects/Sprint/app/src/main/res/layout/toolbar.xml" value="0.2" />
         <entry key="..\:/Android_Projects/Sprint/app/src/main/res/layout/wallet_history_item.xml" value="0.22" />
         <entry key="..\:/Android_Projects/Sprint/app/src/main/res/menu/menu_navigation.xml" value="0.2" />
-        <entry key="..\:/Android_Projects/cryptoapp/app/src/main/res/layout/activity_change_password.xml" value="0.2" />
-        <entry key="..\:/Android_Projects/cryptoapp/app/src/main/res/layout/activity_profile2.xml" value="0.2" />
-        <entry key="..\:/Android_Projects/cryptoapp/app/src/main/res/layout/activity_signup.xml" value="0.2" />
-        <entry key="..\:/Android_Projects/cryptoapp/app/src/main/res/layout/activity_step_history.xml" value="0.2" />
+        <entry key="..\:/Studio Projects/Sprint/app/src/main/res/layout/activity_change_password.xml" value="0.17135416666666667" />
+        <entry key="..\:/Studio Projects/Sprint/app/src/main/res/layout/activity_main.xml" value="0.17135416666666667" />
+        <entry key="..\:/Studio Projects/Sprint/app/src/main/res/layout/activity_profile.xml" value="0.17135416666666667" />
+        <entry key="..\:/Studio Projects/Sprint/app/src/main/res/layout/activity_profile2.xml" value="0.3333333333333333" />
+        <entry key="..\:/Studio Projects/Sprint/app/src/main/res/layout/activity_signin.xml" value="0.17135416666666667" />
+        <entry key="..\:/Studio Projects/Sprint/app/src/main/res/layout/step_history_item.xml" value="0.4466666666666667" />
       </map>
     </option>
   </component>

@@ -62,11 +62,13 @@ public class StepHistoryActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()){
                     StepHistoryResponse body = response.body();
+
                     if(body.getSuccess()){
 
                         binding.stepRecycler.setAdapter(new StepHistoryAdapter(StepHistoryActivity.this, body.getData()));
                     }
                     else{
+                        binding.stepRecycler.setAdapter(new StepHistoryAdapter(StepHistoryActivity.this, body.getData()));
                         Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }else {
@@ -82,6 +84,7 @@ public class StepHistoryActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void initToolbar() {
         findViewById(R.id.back_btn).setOnClickListener(view -> onBackPressed());

@@ -71,6 +71,7 @@
             app:cornerRadius="@dimen/et_radius" />
 
         <TextView
+            android:id="@+id/forgotpassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="20dp"

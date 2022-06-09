@@ -23,6 +23,10 @@ public interface APIInterface {
     Call<LoginResponse> login(
             @Field(Constant.EMAIL) String email,
             @Field(Constant.PASSWORD) String password);
+    @FormUrlEncoded
+    @POST("forgotpassword.php")
+    Call<LoginResponse> forgot(
+            @Field(Constant.EMAIL) String email);
 
     @FormUrlEncoded
     @POST("signup.php")
@@ -40,7 +44,8 @@ public interface APIInterface {
     @POST("changepassword.php")
     Call<LoginResponse> changePassword(
             @Field(Constant.USER_ID) String user_id,
-            @Field(Constant.PASSWORD) String password
+            @Field(Constant.PASSWORD) String password,
+            @Field(Constant.OLDPASSWORD) String oldpassword
     );
 
     @FormUrlEncoded

@@ -42,6 +42,46 @@ public class SigninActivity extends AppCompatActivity {
         binding.signup.setOnClickListener(view ->
                 startActivity(new Intent(getApplicationContext(), SignupActivity.class))
                 );
+        binding.forgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MyFunction.isEmpty(binding.email)){
+                    binding.email.setError("Enter Email");
+                    binding.email.requestFocus();
+                }else {
+                    forgotPassword();
+
+                }
+            }
+        });
+    }
+
+    private void forgotPassword() {
+        MyFunction.showLoader(SigninActivity.this);
+
+        Call<LoginResponse> call = APIClient.getClientWithoutToken().forgot(
+                binding.email.getText().toString().trim()
+        );
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                MyFunction.cancelLoader();
+                LoginResponse loginResponse = response.body();
+                if(loginResponse.getSuccess()){
+
+                    Toast.makeText(getApplicationContext(), loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                MyFunction.cancelLoader();
+                Toast.makeText(getApplicationContext(), Constant.API_ERROR, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void signin() {
