@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.greymatter.sprint.databinding.StepHistoryItemBinding;
 import com.greymatter.sprint.model.StepHistory;
+import com.greymatter.sprint.model.response.StepHistoryResponse;
 
 import java.util.List;
 
@@ -16,9 +17,9 @@ public class StepHistoryAdapter extends RecyclerView.Adapter<StepHistoryAdapter.
 
 
     Context context;
-    List<StepHistory> StepHistoryList;
+    List<StepHistoryResponse.Datum> StepHistoryList;
 
-    public StepHistoryAdapter(Context context, List<StepHistory> StepHistoryList) {
+    public StepHistoryAdapter(Context context, List<StepHistoryResponse.Datum> StepHistoryList) {
         this.context = context;
         this.StepHistoryList = StepHistoryList;
     }
@@ -33,10 +34,10 @@ public class StepHistoryAdapter extends RecyclerView.Adapter<StepHistoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.binding.step.setText(StepHistoryList.get(position).getStep());
-        holder.binding.calorie.setText(StepHistoryList.get(position).getCalorie());
+        holder.binding.step.setText(StepHistoryList.get(position).getSteps());
+        holder.binding.calorie.setText(StepHistoryList.get(position).getCalories());
         holder.binding.date.setText(StepHistoryList.get(position).getDate());
-        holder.binding.amount.setText(StepHistoryList.get(position).getAmount());
+        holder.binding.amount.setText(StepHistoryList.get(position).getEarn());
     }
 
     @Override

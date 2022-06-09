@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.greymatter.sprint.MainActivity;
 import com.greymatter.sprint.R;
 import com.greymatter.sprint.databinding.ActivityProfile2Binding;
+import com.greymatter.sprint.ui.ChangePasswordActivity;
 import com.greymatter.sprint.ui.SplashActivity;
 import com.greymatter.sprint.ui.StepHistoryActivity;
 import com.greymatter.sprint.ui.WalletActivity;
@@ -42,6 +43,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         binding.stepHistory.setOnClickListener(view ->
                 startActivity(new Intent(getApplicationContext(), StepHistoryActivity.class)));
+
+        binding.changePassword.setOnClickListener(view ->
+                startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class)));
 
         binding.instagram.setOnClickListener(view ->
                 openUrl(Constant.INSTAGRAM));

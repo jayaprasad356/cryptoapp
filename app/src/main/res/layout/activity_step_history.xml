@@ -9,6 +9,20 @@
 
     <include layout="@layout/toolbar"/>
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/et_height"
+        android:layout_marginHorizontal="@dimen/horizontal_margin"
+        android:layout_marginVertical="@dimen/vertical_spacing"
+        android:background="@drawable/edittext_bg"
+        android:fontFamily="@font/open_sans"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/et_padding"
+        android:entries="@array/month"
+        android:textColorHint="@color/hint_color" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/step_recycler"
         android:layout_width="match_parent"

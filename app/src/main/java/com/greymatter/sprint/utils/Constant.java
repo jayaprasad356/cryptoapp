@@ -36,4 +36,5 @@ public class Constant {
     public static final String INSTAGRAM = "http://crypto.greymatterworks.in";
     public static final String TELEGRAM = "http://crypto.greymatterworks.in";
     public static final String WHATSAPP = "http://crypto.greymatterworks.in";
+    public static final String MONTH = "month";
 }

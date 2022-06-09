@@ -89,7 +89,7 @@ public class SignupActivity extends AppCompatActivity {
         if (MyFunction.isEmpty(binding.confirmPassword)) return false;
         if (!MyFunction.isValidEmail(binding.email)) return false;
         if (!binding.password.getText().toString().trim().equals(binding.confirmPassword.getText().toString().trim())){
-            binding.confirmPassword.setText("Password doesn't match");
+            binding.confirmPassword.setError("Password doesn't match");
             binding.confirmPassword.requestFocus();
             return false;
         }

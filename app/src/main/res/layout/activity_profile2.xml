@@ -269,6 +269,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/change_password"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

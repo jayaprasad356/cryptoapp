@@ -25,6 +25,9 @@
         android:theme="@style/Theme.Sprint"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".fragment.ChallengesActivity"
             android:exported="false" />
         <activity

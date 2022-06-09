@@ -1,10 +1,12 @@
 package com.greymatter.sprint.api;
 
+import com.greymatter.sprint.model.StepHistory;
 import com.greymatter.sprint.model.response.LoginResponse;
 import com.greymatter.sprint.model.response.ProfileResponse;
 import com.greymatter.sprint.model.response.RegisterResponse;
 import com.greymatter.sprint.model.response.SaveStepsResponse;
 import com.greymatter.sprint.model.response.SendOtpResponse;
+import com.greymatter.sprint.model.response.StepHistoryResponse;
 import com.greymatter.sprint.model.response.StepsResponse;
 import com.greymatter.sprint.utils.Constant;
 
@@ -35,6 +37,13 @@ public interface APIInterface {
     Call<SendOtpResponse> sendOtp(@Field(Constant.EMAIL) String email);
 
     @FormUrlEncoded
+    @POST("changepassword.php")
+    Call<LoginResponse> changePassword(
+            @Field(Constant.USER_ID) String user_id,
+            @Field(Constant.PASSWORD) String password
+    );
+
+    @FormUrlEncoded
     @POST("update_profile.php")
     Call<ProfileResponse> updateProfile(
             @Field(Constant.USER_ID) String user_id,
@@ -58,4 +67,11 @@ public interface APIInterface {
             @Field(Constant.USER_ID) String user_id,
             @Field(Constant.TYPE) String type
             );
+
+    @FormUrlEncoded
+    @POST("history.php")
+    Call<StepHistoryResponse> getStepHistory(
+            @Field(Constant.MONTH) String month);
+
+
 }
