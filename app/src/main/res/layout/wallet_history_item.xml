@@ -21,7 +21,7 @@
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Money sent to Bank Account"
+            android:text="Wallet sent to Bank Account"
             android:fontFamily="@font/source_sans_pro_semibold"
             android:textSize="16sp"
             android:textColor="@color/black"
@@ -31,7 +31,7 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="05 May, 10 : 57 pm"
+            android:text="05-06-2022 12:00 AM"
             android:fontFamily="@font/poppins"
             android:textColor="#404B52"
             android:gravity="center"/>

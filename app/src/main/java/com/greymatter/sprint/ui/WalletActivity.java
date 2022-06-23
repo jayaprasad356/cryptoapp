@@ -26,7 +26,7 @@ public class WalletActivity extends AppCompatActivity {
         initToolbar();
 
         token = MyFunction.getSharedPrefs(getApplicationContext(), Constant.TOKEN,"0");
-        binding.tokenTxt.setText(token+" Token");
+        //binding.tokenTxt.setText(token+" Token");
 
         calculateINR();
 
@@ -38,7 +38,7 @@ public class WalletActivity extends AppCompatActivity {
 
         double token_value = Constant.DEFAULT_TOKEN_VALUE;
         double inr = token_value * Double.parseDouble(token);
-        binding.amount.setText(MyFunction.convertToINR(inr+""));
+        //binding.amount.setText(MyFunction.convertToINR(inr+""));
     }
 
     private void initToolbar() {
