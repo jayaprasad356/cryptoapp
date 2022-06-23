@@ -45,6 +45,6 @@ public class WalletActivity extends AppCompatActivity {
         findViewById(R.id.back_btn).setOnClickListener(view -> onBackPressed());
 
         TextView title = findViewById(R.id.toolbar_title);
-        title.setText("Wallet");
+        title.setText("Transaction");
     }
 }

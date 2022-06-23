@@ -11,8 +11,9 @@ public class Constant {
     public static String API_ERROR = "Something went wrong, please try again later!";
     public static final String EMPTY_ERROR = "Please fill in this field";
     public static final String isLoggedIn = "isLoggedIn";
+    public static final String ADDRESS = "address";
     public static String isDarkModeOn = "isDarkModeOn";
-    public static String BALANCE = "balance";
+    public static final String BALANCE = "balance";
     public static String Rupees = "₹";
     public static final String SAVED_STEPS = "saved_steps";
     public static final String WEIGHT = "weight";

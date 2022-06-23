@@ -36,10 +36,16 @@
             android:textSize="16sp"
             android:textColor="@color/black" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No History Found"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/wallet_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/wallet_history_item"/>
     </LinearLayout>

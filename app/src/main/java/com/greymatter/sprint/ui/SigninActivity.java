@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.greymatter.sprint.MainActivity;
+import com.greymatter.sprint.WalletConnectActivity;
 import com.greymatter.sprint.api.APIClient;
 import com.greymatter.sprint.databinding.ActivitySigninBinding;
 import com.greymatter.sprint.model.response.LoginResponse;
@@ -100,8 +101,7 @@ public class SigninActivity extends AppCompatActivity {
 
                     LocalSession.setLogin(SigninActivity.this,loginResponse);
 
-                    MyFunction.setSharedPrefs(getApplicationContext(), Constant.isLoggedIn,true);
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), WalletConnectActivity.class));
                 }
                 else{
                     Toast.makeText(getApplicationContext(), loginResponse.getMessage(), Toast.LENGTH_SHORT).show();

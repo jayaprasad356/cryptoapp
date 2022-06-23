@@ -19,6 +19,11 @@ import retrofit2.http.POST;
 public interface APIInterface {
 
     @FormUrlEncoded
+    @POST("minbal.php")
+    Call<LoginResponse> minbal(
+            @Field(Constant.BALANCE) String balance);
+
+    @FormUrlEncoded
     @POST("login.php")
     Call<LoginResponse> login(
             @Field(Constant.EMAIL) String email,

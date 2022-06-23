@@ -1,6 +1,7 @@
 package com.greymatter.sprint
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -35,13 +36,15 @@ class WalletConnectActivity : AppCompatActivity() {
         setContentView(R.layout.activity_wallet_connect)
         session = Session(this@WalletConnectActivity)
         initViews()
-        btnView.setOnClickListener {
-            walletBalance.visibility = View.VISIBLE
-            walletBalance.text = session?.getData(
-                Constant.BALANCE
-            )
 
-        }
+
+//        btnView.setOnClickListener {
+//            walletBalance.visibility = View.VISIBLE
+//            walletBalance.text = session?.getData(
+//                Constant.BALANCE
+//            )
+//
+//        }
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -59,6 +62,11 @@ class WalletConnectActivity : AppCompatActivity() {
 //    }
 
     private fun initViews() {
+        if (session!!.getBoolean("walletconnect")){
+            Log.d("WAL_CONNECT","DISCONNECTED");
+            onDisconnected()
+
+        }
         loginView.start(walletConnectKit, ::onConnected, ::onDisconnected)
         //initPerformTransactionView()
     }
@@ -67,10 +75,12 @@ class WalletConnectActivity : AppCompatActivity() {
 
     @SuppressLint("StringFormatInvalid")
     private fun onConnected(address: String){
+
         loginView.visibility = View.GONE
-        connectedView.visibility = View.VISIBLE
-        connectedAddressView.text = "Address - "+address
-        walletBalance.visibility = View.GONE
+        session?.setData(
+            Constant.ADDRESS,
+            address
+        )
 
         val url = Constant.BASE_URL + "getwalletbalance.html?"+address
         var balance = ""
@@ -78,7 +88,6 @@ class WalletConnectActivity : AppCompatActivity() {
             val doc = Jsoup.connect(url).get()
             balance = doc.title()
             setvalue(balance)
-            Log.d("ADDRESS",address)
 
         }
 
@@ -88,8 +97,8 @@ class WalletConnectActivity : AppCompatActivity() {
     }
 
     private fun setvalue(balance: String) {
-        Log.d("BALANCE",balance)
         setbalvalue(balance)
+        startActivity(Intent(applicationContext, WalletDetailsActivity::class.java))
 
     }
 
@@ -114,9 +123,11 @@ class WalletConnectActivity : AppCompatActivity() {
             Constant.BALANCE,
             ""
         )
-        loginView.visibility = View.VISIBLE
-        connectedView.visibility = View.GONE
-        invalidateOptionsMenu()
+        session?.setBoolean(
+            "walletconnect",
+            false
+        )
+        walletConnectKit.removeSession()
     }
 //
 //    private fun initPerformTransactionView() = with(binding) {

@@ -63,12 +63,12 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
         binding.tokenTxt.setText(MyFunction.getSharedPrefs(applicationContext, Constant.TOKEN, "0") + " Token")
         
         binding.notification.setOnClickListener { view ->
-            startActivity(
-                Intent(
-                    this,
-                    NotificationActivity::class.java
-                )
-            )
+//            startActivity(
+//                Intent(
+//                    this,
+//                    NotificationActivity::class.java
+//                )
+//            )
         }
 
         binding.updateToDb.setOnClickListener { view -> syncTodaySteps() }
