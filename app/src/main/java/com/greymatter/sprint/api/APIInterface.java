@@ -8,6 +8,7 @@ import com.greymatter.sprint.model.response.SaveStepsResponse;
 import com.greymatter.sprint.model.response.SendOtpResponse;
 import com.greymatter.sprint.model.response.StepHistoryResponse;
 import com.greymatter.sprint.model.response.StepsResponse;
+import com.greymatter.sprint.model.response.WalletHistoryResponse;
 import com.greymatter.sprint.utils.Constant;
 
 import retrofit2.Call;
@@ -46,6 +47,14 @@ public interface APIInterface {
     Call<SendOtpResponse> sendOtp(@Field(Constant.EMAIL) String email);
 
     @FormUrlEncoded
+    @POST("updatewallet.php")
+    Call<LoginResponse> updateWallet(
+            @Field(Constant.USER_ID) String user_id,
+            @Field(Constant.WALLET_BALANCE) String walletbalance,
+            @Field(Constant.WALLET_ADDRESS) String walletaddress
+    );
+
+    @FormUrlEncoded
     @POST("changepassword.php")
     Call<LoginResponse> changePassword(
             @Field(Constant.USER_ID) String user_id,
@@ -64,7 +73,7 @@ public interface APIInterface {
             @Field(Constant.AGE) String age);
 
     @FormUrlEncoded
-    @POST("savesteps.php")
+    @POST("savestep.php")
     Call<SaveStepsResponse> saveSteps(
             @Field(Constant.USER_ID) String user_id,
             @Field(Constant.TODAY_STEP_COUNT) String today_step_count,
@@ -81,7 +90,11 @@ public interface APIInterface {
     @FormUrlEncoded
     @POST("history.php")
     Call<StepHistoryResponse> getStepHistory(
-            @Field(Constant.MONTH) String month);
+            @Field(Constant.USER_ID) String user_id,@Field(Constant.MONTH) String month);
+    @FormUrlEncoded
+    @POST("wallet_history.php")
+    Call<WalletHistoryResponse> getWalletHistory(
+            @Field(Constant.USER_ID) String user_id);
 
 
 }

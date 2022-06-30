@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
         
         getStepsListWeekly()
         getStepsListMonthly()
+        binding.estReward.setText("Estimated Reward = "+MyFunction.getSharedPrefs(applicationContext, Constant.REWARD, "0"))
 
         binding.tokenTxt.setText(MyFunction.getSharedPrefs(applicationContext, Constant.TOKEN, "0") + " Token")
         
@@ -165,7 +166,7 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
         val cals = Calendar.getInstance()
         //Using format() method for conversion
         val currentDate = Date.format(cals.time)
-        binding.date.text = currentDate
+       // binding.date.text = currentDate
     }
 
     private fun syncTodaySteps() {
@@ -175,6 +176,8 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
             val formatter = SimpleDateFormat("yyyy-MM-dd")
             val date = Date()
             val current_date = formatter.format(date)
+            Log.d("STEPS_COUNT",step_count.toString() +" - "+binding.kcal.text.toString() +" - "+current_date)
+
             MyFunction.showLoader(this)
             val call = APIClient.getClientWithoutToken().saveSteps(
                 MyFunction.getSharedPrefs(applicationContext, Constant.USER_ID, ""),
@@ -194,7 +197,7 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
                         if (body.success) {
                         }
                     } else {
-                        Toast.makeText(applicationContext, Constant.API_ERROR, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, response.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
 

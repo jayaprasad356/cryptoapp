@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class LoginResponse {
+public class WalletHistoryResponse {
 
     @SerializedName("success")
     @Expose
@@ -46,18 +46,18 @@ public class LoginResponse {
         @SerializedName("id")
         @Expose
         private String id;
-        @SerializedName("name")
+        @SerializedName("user_id")
         @Expose
-        private String name;
-        @SerializedName("email")
-        @Expose
-        private String email;
-        @SerializedName("password")
-        @Expose
-        private String password;
+        private String userId;
         @SerializedName("reward")
         @Expose
         private String reward;
+        @SerializedName("steps")
+        @Expose
+        private String steps;
+        @SerializedName("reward_date")
+        @Expose
+        private String reward_date;
 
         public String getId() {
             return id;
@@ -67,28 +67,12 @@ public class LoginResponse {
             this.id = id;
         }
 
-        public String getName() {
-            return name;
+        public String getUserId() {
+            return userId;
         }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
+        public void setUserId(String userId) {
+            this.userId = userId;
         }
 
         public String getReward() {
@@ -97,6 +81,22 @@ public class LoginResponse {
 
         public void setReward(String reward) {
             this.reward = reward;
+        }
+
+        public String getSteps() {
+            return steps;
+        }
+
+        public void setSteps(String steps) {
+            this.steps = steps;
+        }
+
+        public String getReward_date() {
+            return reward_date;
+        }
+
+        public void setReward_date(String reward_date) {
+            this.reward_date = reward_date;
         }
     }
 }

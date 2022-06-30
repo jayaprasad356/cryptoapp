@@ -27,7 +27,10 @@ public class Constant {
     public static final String USER_ID = "user_id";
     public static final String EMAIL = "email";
     public static final String NAME = "name";
+    public static final String REWARD = "reward";
     public static final String PASSWORD = "password";
+    public static final String WALLET_BALANCE = "wallet_balance";
+    public static final String WALLET_ADDRESS = "wallet_address";
     public static final String OLDPASSWORD = "oldpassword";
     public static final String GENDER = "gender";
     public static final String AGE = "age";

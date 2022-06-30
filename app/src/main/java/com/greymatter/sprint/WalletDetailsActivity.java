@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.greymatter.sprint.api.APIClient;
 import com.greymatter.sprint.model.response.LoginResponse;
+import com.greymatter.sprint.ui.ChangePasswordActivity;
 import com.greymatter.sprint.ui.SigninActivity;
 import com.greymatter.sprint.utils.Constant;
 import com.greymatter.sprint.utils.LocalSession;
@@ -77,6 +78,36 @@ public class WalletDetailsActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        updateWallet();
+    }
+
+    private void updateWallet() {
+        MyFunction.showLoader(WalletDetailsActivity.this);
+
+        Call<LoginResponse> call = APIClient.getClientWithoutToken().updateWallet(
+                MyFunction.getSharedPrefs(getApplicationContext(),Constant.USER_ID,""),
+                session.getData(Constant.BALANCE),session.getData(Constant.ADDRESS)
+        );
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                MyFunction.cancelLoader();
+
+                LoginResponse body = response.body();
+                Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                MyFunction.cancelLoader();
+                Toast.makeText(getApplicationContext(), Constant.API_ERROR, Toast.LENGTH_SHORT).show();
             }
         });
     }

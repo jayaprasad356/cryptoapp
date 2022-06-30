@@ -53,6 +53,7 @@ public class StepHistoryActivity extends AppCompatActivity {
         MyFunction.showLoader(StepHistoryActivity.this);
 
         Call<StepHistoryResponse> call = APIClient.getClientWithoutToken().getStepHistory(
+                MyFunction.getSharedPrefs(getApplicationContext(),Constant.USER_ID,""),
                 month
         );
         call.enqueue(new Callback<StepHistoryResponse>() {

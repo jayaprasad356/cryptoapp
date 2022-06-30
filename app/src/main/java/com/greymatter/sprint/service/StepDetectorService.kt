@@ -33,7 +33,7 @@ class StepDetectorService : Service(), SensorEventListener {
             //Toast.makeText(this, "Step Detecting Start", Toast.LENGTH_SHORT).show()
             sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_NORMAL)
 
-            GeneralHelper.updateNotification(this, this, PrefsHelper.getInt("FSteps"))
+            //GeneralHelper.updateNotification(this, this, PrefsHelper.getInt("FSteps"))
             callback.subscribeSteps(PrefsHelper.getInt("FSteps"))
 
         }else{
@@ -57,7 +57,7 @@ class StepDetectorService : Service(), SensorEventListener {
             val finalSteps = sensorSteps - storeSteps
             if (finalSteps > 0) {
                 PrefsHelper.putInt("FSteps", finalSteps)
-                GeneralHelper.updateNotification(this, this, finalSteps)
+                //GeneralHelper.updateNotification(this, this, finalSteps)
                 callback?.subscribeSteps(finalSteps)
             }
         }

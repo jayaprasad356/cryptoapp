@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.greymatter.sprint.databinding.WalletHistoryItemBinding;
 import com.greymatter.sprint.model.WalletHistory;
+import com.greymatter.sprint.model.response.StepHistoryResponse;
+import com.greymatter.sprint.model.response.WalletHistoryResponse;
 
 import java.util.List;
 
@@ -16,9 +18,9 @@ public class WalletHistoryAdapter extends RecyclerView.Adapter<WalletHistoryAdap
 
 
     Context context;
-    List<WalletHistory> walletHistoryList;
+    List<WalletHistoryResponse.Datum> walletHistoryList;
 
-    public WalletHistoryAdapter(Context context, List<WalletHistory> walletHistoryList) {
+    public WalletHistoryAdapter(Context context, List<WalletHistoryResponse.Datum> walletHistoryList) {
         this.context = context;
         this.walletHistoryList = walletHistoryList;
     }
@@ -33,10 +35,8 @@ public class WalletHistoryAdapter extends RecyclerView.Adapter<WalletHistoryAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.binding.message.setText(walletHistoryList.get(position).getMsg());
-        holder.binding.date.setText(walletHistoryList.get(position).getDate());
-        holder.binding.amount.setText(walletHistoryList.get(position).getAmount());
-        holder.binding.transactionType.setText(walletHistoryList.get(position).getTransaction_type());
+        holder.binding.date.setText(walletHistoryList.get(position).getReward_date());
+        holder.binding.amount.setText(walletHistoryList.get(position).getReward());
     }
 
     @Override
