@@ -58,6 +58,15 @@ public class LoginResponse {
         @SerializedName("reward")
         @Expose
         private String reward;
+        @SerializedName("weight")
+        @Expose
+        private String weight;
+        @SerializedName("height")
+        @Expose
+        private String height;
+        @SerializedName("age")
+        @Expose
+        private String age;
 
         public String getId() {
             return id;
@@ -97,6 +106,30 @@ public class LoginResponse {
 
         public void setReward(String reward) {
             this.reward = reward;
+        }
+
+        public String getWeight() {
+            return weight;
+        }
+
+        public void setWeight(String weight) {
+            this.weight = weight;
+        }
+
+        public String getHeight() {
+            return height;
+        }
+
+        public void setHeight(String height) {
+            this.height = height;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
         }
     }
 }

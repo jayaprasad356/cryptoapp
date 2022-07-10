@@ -47,12 +47,14 @@ public class ProfileActivity extends AppCompatActivity {
         binding.changePassword.setOnClickListener(view ->
                 startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class)));
 
-        binding.instagram.setOnClickListener(view ->
-                openUrl(Constant.INSTAGRAM));
-        binding.telegram.setOnClickListener(view ->
-                openUrl(Constant.TELEGRAM));
-        binding.whatsapp.setOnClickListener(view ->
-                openUrl(Constant.WHATSAPP));
+        binding.telegram1.setOnClickListener(view ->
+                openUrl(Constant.TELEGRAM1));
+        binding.telegram2.setOnClickListener(view ->
+                openUrl(Constant.TELEGRAM2));
+        binding.web.setOnClickListener(view ->
+                openUrl(Constant.WEB));
+        binding.twitter.setOnClickListener(view ->
+                openUrl(Constant.TWITTER));
 
         binding.logout.setOnClickListener(view -> logout());
 

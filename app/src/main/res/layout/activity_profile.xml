@@ -20,6 +20,7 @@
             android:layout_gravity="center"
             android:src="@drawable/profile_avatar"
             app:civ_border_width="1dp"
+            android:visibility="gone"
             app:civ_border_color="@color/primary" />
 
         <TextView
@@ -43,6 +44,21 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center_vertical"
             android:hint="Full Name"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/et_padding"
+            android:singleLine="true"
+            android:textColorHint="@color/hint_color" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:background="@drawable/edittext_bg"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center_vertical"
+            android:hint="Email"
+            android:enabled="false"
             android:inputType="textEmailAddress"
             android:paddingStart="@dimen/et_padding"
             android:singleLine="true"

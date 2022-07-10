@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SigninActivity">
+    tools:context=".ui.SignupActivity">
 
 
     <LinearLayout
@@ -97,6 +97,7 @@
             android:layout_marginTop="@dimen/vertical_spacing"
             android:background="@drawable/edittext_bg"
             android:fontFamily="@font/open_sans"
+            android:visibility="gone"
             android:gravity="center_vertical"
             android:paddingStart="@dimen/et_padding"
             android:entries="@array/gender"
@@ -110,7 +111,7 @@
             android:layout_marginTop="30dp"
             android:insetTop="3dp"
             android:insetBottom="3dp"
-            android:text="Sign up"
+            android:text="Next"
             app:cornerRadius="@dimen/et_radius" />
 
 

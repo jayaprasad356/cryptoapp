@@ -19,9 +19,10 @@ import com.greymatter.sprint.callback.StepsCallback
 import com.greymatter.sprint.databinding.ActivityMainBinding
 import com.greymatter.sprint.fragment.ChallengesActivity
 import com.greymatter.sprint.fragment.ProfileActivity
+import com.greymatter.sprint.model.response.LoginResponse
 import com.greymatter.sprint.model.response.SaveStepsResponse
 import com.greymatter.sprint.model.response.StepsResponse
-import com.greymatter.sprint.ui.NotificationActivity
+import com.greymatter.sprint.ui.SigninActivity
 import com.greymatter.sprint.utils.CalorieBurnedCalculator
 import com.greymatter.sprint.utils.Constant
 import com.greymatter.sprint.utils.MyFunction
@@ -31,6 +32,12 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.jsoup.Jsoup
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,11 +50,28 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
 
     var doubleBackToExitPressedOnce = false
     lateinit var binding :ActivityMainBinding
+    var session: Session? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        session = Session(this@MainActivity)
+        val circularProgressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar)
+        //binding.walletBalance.setText(session?.getData(Constant.BALANCE))
+        binding.walletAddress.setText(session?.getData(Constant.ADDRESS))
+        circularProgressBar.apply {
+            // Set Progress
+            progress = 50f
+            // or with animation
+            //setProgressWithAnimation(65f, 1000) // =1s
+
+            // Set Progress Max
+            //progressMax = 200f
+
+            // Set ProgressBar Color
+            progressBarColor = getResources().getColor(R.color.primary)
+        }
 
         initBottomNav()
 
@@ -59,9 +83,9 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
         
         getStepsListWeekly()
         getStepsListMonthly()
-        binding.estReward.setText("Estimated Reward = "+MyFunction.getSharedPrefs(applicationContext, Constant.REWARD, "0"))
+        binding.estReward.setText(MyFunction.getSharedPrefs(applicationContext, Constant.REWARD, "0"))
 
-        binding.tokenTxt.setText(MyFunction.getSharedPrefs(applicationContext, Constant.TOKEN, "0") + " Token")
+       // binding.tokenTxt.setText(MyFunction.getSharedPrefs(applicationContext, Constant.TOKEN, "0") + " Token")
         
         binding.notification.setOnClickListener { view ->
 //            startActivity(
@@ -266,6 +290,87 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
         super.onResume()
         binding.username.text =
             "Welcome, " + MyFunction.getSharedPrefs(applicationContext, Constant.NAME, "Guest")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        checkLogin();
+        StepsPercentage()
+        val url = Constant.BASE_URL + "getwalletbalance.html?"+session?.getData(Constant.ADDRESS)
+        var balance = ""
+        GlobalScope.launch(Dispatchers.IO) {
+            val doc = Jsoup.connect(url).get()
+            balance = doc.title()
+            binding.walletBalance.setText(balance)
+
+        }
+        updateWalletAddress();
+
+
+    }
+
+    private fun updateWalletAddress() {
+
+        val call = APIClient.getClientWithoutToken().minbal(
+            session!!.getData(Constant.BALANCE)
+        )
+        call.enqueue(object : Callback<LoginResponse?> {
+            override fun onResponse(
+                call: Call<LoginResponse?>,
+                response: Response<LoginResponse?>
+            ) {
+                MyFunction.cancelLoader()
+                val loginResponse = response.body()
+                if (loginResponse!!.success) {
+                    MyFunction.setSharedPrefs(applicationContext, Constant.isLoggedIn, true)
+
+                } else {
+                    Toast.makeText(applicationContext, loginResponse!!.message, Toast.LENGTH_SHORT)
+                        .show()
+                    startActivity(Intent(applicationContext, SigninActivity::class.java))
+                    finish()
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse?>, t: Throwable) {
+                MyFunction.cancelLoader()
+                Toast.makeText(applicationContext, Constant.API_ERROR, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+    }
+
+    private fun checkLogin() {
+
+    }
+
+    private fun StepsPercentage() {
+        //MyFunction.showLoader(this)
+        val call = APIClient.getClientWithoutToken().stepsPercentage("1"
+
+        )
+        call.enqueue(object : Callback<SaveStepsResponse?> {
+            override fun onResponse(
+                call: Call<SaveStepsResponse?>,
+                response: Response<SaveStepsResponse?>
+            ) {
+                //MyFunction.cancelLoader()
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    //Toast.makeText(applicationContext, body!!.message, Toast.LENGTH_SHORT).show()
+                    if (body!!.success) {
+                        binding.tvPercentage.setText(body!!.steps + "%")
+                    }
+                } else {
+                    //Toast.makeText(applicationContext, response.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<SaveStepsResponse?>, t: Throwable) {
+                //MyFunction.cancelLoader()
+                Toast.makeText(applicationContext, Constant.API_ERROR, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onBackPressed() {

@@ -25,14 +25,14 @@
         android:theme="@style/Theme.Sprint"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.SelectGenderActivity"
+            android:exported="false" />
+        <activity
             android:name=".WalletDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".WalletConnectActivity"
-            android:exported="true">
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.ChangePasswordActivity"
             android:exported="false" />
@@ -68,13 +68,12 @@
             android:exported="false" />
         <activity
             android:name=".ui.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <meta-data

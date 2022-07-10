@@ -40,7 +40,10 @@ public interface APIInterface {
             @Field(Constant.NAME) String name,
             @Field(Constant.EMAIL) String email,
             @Field(Constant.PASSWORD) String password,
-            @Field(Constant.GENDER) String gender);
+            @Field(Constant.GENDER) String gender,
+            @Field(Constant.WEIGHT) String weight,
+            @Field(Constant.HEIGHT) String height,
+            @Field(Constant.AGE) String age);
 
     @FormUrlEncoded
     @POST("verifyemail.php")
@@ -79,6 +82,11 @@ public interface APIInterface {
             @Field(Constant.TODAY_STEP_COUNT) String today_step_count,
             @Field(Constant.CALORIES) String calories,
             @Field(Constant.DATE) String date);
+
+    @FormUrlEncoded
+    @POST("stepspercentage.php")
+    Call<SaveStepsResponse> stepsPercentage(
+            @Field(Constant.USER_ID) String user_id);
 
     @FormUrlEncoded
     @POST("stepslist.php")

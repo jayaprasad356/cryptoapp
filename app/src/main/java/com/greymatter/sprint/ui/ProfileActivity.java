@@ -33,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
         initToolbar();
 
         binding.name.setText(MyFunction.getSharedPrefs(getApplicationContext(), Constant.NAME,"Guest"));
+        binding.email.setText(MyFunction.getSharedPrefs(getApplicationContext(), Constant.EMAIL,"Guest"));
         binding.weight.setText(MyFunction.getSharedPrefs(getApplicationContext(), Constant.WEIGHT,"50"));
         binding.height.setText(MyFunction.getSharedPrefs(getApplicationContext(), Constant.HEIGHT,"165"));
         binding.age.setText(MyFunction.getSharedPrefs(getApplicationContext(), Constant.AGE,"20"));

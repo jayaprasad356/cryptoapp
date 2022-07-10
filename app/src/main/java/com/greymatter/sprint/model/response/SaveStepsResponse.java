@@ -13,6 +13,9 @@ public class SaveStepsResponse {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("steps")
+    @Expose
+    private String steps;
     @SerializedName("data")
     @Expose
     private List<LoginResponse.Datum> data = null;
@@ -39,5 +42,13 @@ public class SaveStepsResponse {
 
     public void setData(List<LoginResponse.Datum> data) {
         this.data = data;
+    }
+
+    public String getSteps() {
+        return steps;
+    }
+
+    public void setSteps(String steps) {
+        this.steps = steps;
     }
 }

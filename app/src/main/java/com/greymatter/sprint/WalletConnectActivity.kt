@@ -98,7 +98,7 @@ class WalletConnectActivity : AppCompatActivity() {
 
     private fun setvalue(balance: String) {
         setbalvalue(balance)
-        startActivity(Intent(applicationContext, WalletDetailsActivity::class.java))
+        startActivity(Intent(applicationContext, MainActivity::class.java))
 
     }
 

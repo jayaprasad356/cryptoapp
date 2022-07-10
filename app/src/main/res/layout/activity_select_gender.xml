@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SelectGenderActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:text="Profile"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+
+                    android:id="@+id/male"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/voilet_curve_stroke_bg">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/voilet_bg"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:src="@drawable/maleemoji" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:textSize="16dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/female"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/voilet_curve_stroke_bg">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/voilet_bg"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:src="@drawable/womenemoji" />
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:textSize="16dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+        </LinearLayout>
+        <EditText
+            android:id="@+id/weight"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:background="@drawable/edittext_bg"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center_vertical"
+            android:hint="Weight in Kg"
+            android:inputType="number"
+            android:maxLength="3"
+            android:paddingStart="@dimen/et_padding"
+            android:singleLine="true"
+            android:textColorHint="@color/hint_color" />
+
+        <EditText
+            android:id="@+id/height"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:background="@drawable/edittext_bg"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center_vertical"
+            android:hint="Height in cm"
+            android:inputType="number"
+            android:maxLength="3"
+            android:paddingStart="@dimen/et_padding"
+            android:singleLine="true"
+            android:textColorHint="@color/hint_color" />
+
+        <EditText
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:background="@drawable/edittext_bg"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center_vertical"
+            android:hint="Age"
+            android:inputType="number"
+            android:maxLength="2"
+            android:paddingStart="@dimen/et_padding"
+            android:singleLine="true"
+            android:textColorHint="@color/hint_color" />
+
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/et_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="@dimen/horizontal_margin"
+        android:layout_marginTop="30dp"
+        android:insetTop="3dp"
+        android:insetBottom="3dp"
+        android:text="Continue"
+        app:cornerRadius="@dimen/et_radius" />
+
+
+</RelativeLayout>

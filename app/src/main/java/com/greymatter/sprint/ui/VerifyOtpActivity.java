@@ -76,7 +76,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
     private void verifyOtp(String otp) {
         if (otp.equals(correct_otp)){
             binding.otpView.showSuccess();
-            signup();
+            selectgender();
             binding.otpView.clearFocus();
         }else {
             binding.otpView.showError();
@@ -84,40 +84,16 @@ public class VerifyOtpActivity extends AppCompatActivity {
         }
     }
 
-    private void signup() {
-        MyFunction.showLoader(VerifyOtpActivity.this);
-
-        Call<RegisterResponse> call = APIClient.getClientWithoutToken().register(
-                name,
-                email,
-                password,
-                "Male"
-        );
-        call.enqueue(new Callback<RegisterResponse>() {
-            @Override
-            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                MyFunction.cancelLoader();
-                RegisterResponse RegisterResponse = response.body();
-                if(RegisterResponse.getSuccess()){
-
-                    LocalSession.setLogin(VerifyOtpActivity.this,RegisterResponse);
-
-                    MyFunction.setSharedPrefs(getApplicationContext(), Constant.isLoggedIn,true);
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), RegisterResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RegisterResponse> call, Throwable t) {
-                MyFunction.cancelLoader();
-                Toast.makeText(getApplicationContext(), Constant.API_ERROR, Toast.LENGTH_SHORT).show();
-            }
-        });
+    private void selectgender()
+    {
+        startActivity(new Intent(getApplicationContext(), SelectGenderActivity.class)
+                        .putExtra(Constant.EMAIL,email)
+                        .putExtra(Constant.NAME,name)
+                        .putExtra(Constant.PASSWORD,password));
+        finish();
     }
+
+
 
     private void sendOtp() {
         MyFunction.showLoader(VerifyOtpActivity.this);

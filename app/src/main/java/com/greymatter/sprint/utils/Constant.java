@@ -40,8 +40,9 @@ public class Constant {
     public static final String WEEKLY = "weekly";
     public static final String MONTHLY = "monthly";
     public static final String OTP = "otp";
-    public static final String INSTAGRAM = "http://crypto.greymatterworks.in";
-    public static final String TELEGRAM = "http://crypto.greymatterworks.in";
-    public static final String WHATSAPP = "http://crypto.greymatterworks.in";
+    public static final String WEB = "https://thesprint.app";
+    public static final String TWITTER = "https://twitter.com/thesprintapp";
+    public static final String TELEGRAM2 = "https://t.me/thesprintappchat";
+    public static final String TELEGRAM1 = "https://t.me/thesprintapp";
     public static final String MONTH = "month";
 }
