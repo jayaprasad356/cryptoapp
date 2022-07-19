@@ -2,12 +2,12 @@ package com.greymatter.sprint.model;
 
 public class Notification {
 
-    private String title,description,date;
+    private String title,description,date_created;
 
-    public Notification(String title, String description, String date) {
+    public Notification(String title, String description, String date_created) {
         this.title = title;
         this.description = description;
-        this.date = date;
+        this.date_created = date_created;
     }
 
     public String getTitle() {
@@ -26,11 +26,11 @@ public class Notification {
         this.description = description;
     }
 
-    public String getDate() {
-        return date;
+    public String getDate_created() {
+        return date_created;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDate_created(String date_created) {
+        this.date_created = date_created;
     }
 }

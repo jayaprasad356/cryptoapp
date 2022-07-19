@@ -3,15 +3,12 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/vertical_spacing">
+    android:background="#DCDCDC"
+    android:layout_margin="10dp"
+    android:padding="5dp">
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/gradient_circle"/>
 
     <LinearLayout
-        android:layout_marginHorizontal="@dimen/vertical_spacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -35,20 +32,13 @@
             android:fontFamily="@font/poppins"
             android:textColor="#404B52"
             android:gravity="center"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="05 May, 10 : 57 pm"
+            android:text=""
             android:fontFamily="@font/poppins"
+            android:textSize="10dp"
             android:textColor="#404B52"
             android:gravity="center"/>
 

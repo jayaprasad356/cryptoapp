@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:padding="@dimen/horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +45,6 @@
                         android:fontFamily="@font/poppins"
                         android:text="Wallet Balance : "
                         android:textColor="#B80A0615" />
-
                     <TextView
                         android:id="@+id/wallet_balance"
                         android:layout_width="match_parent"
@@ -52,6 +52,14 @@
                         android:fontFamily="@font/poppins_semibold"
                         android:text="0"
                         android:textColor="@color/red" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text=" BNB"
+                        android:textColor="@color/red" />
+
 
                 </LinearLayout>
 
@@ -412,7 +420,7 @@
                     android:id="@+id/tvPercentage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10%"
+                    android:text="0%"
                     android:layout_centerInParent="true"
                     android:textColor="@color/red"
                     android:textStyle="bold"

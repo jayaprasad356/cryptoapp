@@ -54,18 +54,24 @@
         <entry key="..\:/Studio Projects/Sprint/app/src/main/res/layout/wallet_history_item.xml" value="0.22" />
         <entry key="..\:/Studio Projects/Sprint/app/src/main/res/menu/toolbar_menu.xml" value="0.17552083333333332" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/drawable/bg.xml" value="0.14" />
+        <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/drawable/card_bg.xml" value="0.14" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/drawable/edittext_bg.xml" value="0.14" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/drawable/voilet_bg.xml" value="0.14" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/drawable/voilet_cornered_bg.xml" value="0.14" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/drawable/voilet_curve_stroke_bg.xml" value="0.22" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/drawable/voilet_fill_curve_stroke_bg.xml" value="0.14" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/drawable/voilet_stroke_bg.xml" value="0.14" />
+        <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/activity_jsoup_test.xml" value="0.17552083333333332" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/activity_notification.xml" value="0.17552083333333332" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/activity_profile.xml" value="0.3333333333333333" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/activity_profile2.xml" value="0.3333333333333333" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/activity_select_gender.xml" value="0.22" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/activity_signup.xml" value="0.17552083333333332" />
+        <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/activity_splash.xml" value="0.17552083333333332" />
+        <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/activity_step_history.xml" value="0.17552083333333332" />
         <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/activity_wallet_connect.xml" value="0.17552083333333332" />
+        <entry key="..\:/Studio Projects/cryptoapp/app/src/main/res/layout/notification_item.xml" value="0.3333333333333333" />
       </map>
     </option>
   </component>

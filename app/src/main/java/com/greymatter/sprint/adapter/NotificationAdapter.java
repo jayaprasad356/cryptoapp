@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.greymatter.sprint.databinding.NotificationItemBinding;
 import com.greymatter.sprint.model.Notification;
+import com.greymatter.sprint.model.response.NotificationResponse;
+import com.greymatter.sprint.model.response.StepHistoryResponse;
 
 import java.util.List;
 
@@ -16,9 +18,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
 
     Context context;
-    List<Notification> NotificationList;
+    List<NotificationResponse.Datum> NotificationList;
 
-    public NotificationAdapter(Context context, List<Notification> NotificationList) {
+    public NotificationAdapter(Context context, List<NotificationResponse.Datum> NotificationList) {
         this.context = context;
         this.NotificationList = NotificationList;
     }
@@ -35,7 +37,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         holder.binding.title.setText(NotificationList.get(position).getTitle());
         holder.binding.description.setText(NotificationList.get(position).getDescription());
-        holder.binding.date.setText(NotificationList.get(position).getDate());
+        holder.binding.date.setText(NotificationList.get(position).getDate_created());
     }
 
     @Override

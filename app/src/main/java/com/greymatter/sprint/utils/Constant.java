@@ -25,6 +25,7 @@ public class Constant {
     public static String DEFAULT_STEP_UNIT = Locale.getDefault() == Locale.US ? "ft" : "cm";
     public static final String TOKEN = "token";
     public static final String USER_ID = "user_id";
+    public static final String NOTIFY = "notify";
     public static final String EMAIL = "email";
     public static final String NAME = "name";
     public static final String REWARD = "reward";

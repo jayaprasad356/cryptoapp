@@ -1,7 +1,10 @@
 package com.greymatter.sprint
 
 import android.Manifest
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -19,9 +22,11 @@ import com.greymatter.sprint.callback.StepsCallback
 import com.greymatter.sprint.databinding.ActivityMainBinding
 import com.greymatter.sprint.fragment.ChallengesActivity
 import com.greymatter.sprint.fragment.ProfileActivity
+import com.greymatter.sprint.helper.PrefsHelper
 import com.greymatter.sprint.model.response.LoginResponse
 import com.greymatter.sprint.model.response.SaveStepsResponse
 import com.greymatter.sprint.model.response.StepsResponse
+import com.greymatter.sprint.ui.NotificationActivity
 import com.greymatter.sprint.ui.SigninActivity
 import com.greymatter.sprint.utils.CalorieBurnedCalculator
 import com.greymatter.sprint.utils.Constant
@@ -34,13 +39,13 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.select.Elements
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -60,9 +65,10 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
         val circularProgressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar)
         //binding.walletBalance.setText(session?.getData(Constant.BALANCE))
         binding.walletAddress.setText(session?.getData(Constant.ADDRESS))
+        binding.walletBalance.setText(session?.getData(Constant.BALANCE))
         circularProgressBar.apply {
             // Set Progress
-            progress = 50f
+            //progress = 50f
             // or with animation
             //setProgressWithAnimation(65f, 1000) // =1s
 
@@ -88,12 +94,12 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
        // binding.tokenTxt.setText(MyFunction.getSharedPrefs(applicationContext, Constant.TOKEN, "0") + " Token")
         
         binding.notification.setOnClickListener { view ->
-//            startActivity(
-//                Intent(
-//                    this,
-//                    NotificationActivity::class.java
-//                )
-//            )
+            startActivity(
+                Intent(
+                    this,
+                    NotificationActivity::class.java
+                )
+            )
         }
 
         binding.updateToDb.setOnClickListener { view -> syncTodaySteps() }
@@ -118,7 +124,86 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
+
+        DataGrabber(applicationContext).execute()
     }
+    class DataGrabber(applicationContext: Context) : AsyncTask<Void, Void, String>() {
+        var context:Context? = applicationContext
+        var session: Session? = null
+        var url = "https://bscscan.com/address/"+session?.getData(Constant.ADDRESS)
+        var doc: Document? = null
+        override fun doInBackground(vararg params: Void?): String? {
+            try {
+                doc = Jsoup.connect(url).get()
+            } catch (e: IOException) {
+                // TODO Auto-generated catch block
+                e.printStackTrace()
+            }
+            return null
+            // ...
+        }
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            // ...
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            if (doc != null) {
+                val text: Elements = doc!!.select("div[class=col-md-8]")
+                val txtstr = text.text()
+                val splitStr = txtstr.split("\\s+").toTypedArray()
+                var bal = ""
+                var balance = ""
+                bal = splitStr[0]
+                balance = bal[0].toString()
+                session = Session(context)
+                session?.setData(
+                    Constant.BALANCE,
+                    balance
+                )
+
+
+                Log.d("JSOUP_TEXT", balance)
+                updateWalletAddress()
+            } else {
+                Log.d("JSOUP_TEXT", "FAILED")
+            }
+            // ...
+        }
+        private fun updateWalletAddress() {
+            val call = APIClient.getClientWithoutToken().minbal(
+                session!!.getData(Constant.BALANCE)
+            )
+            call.enqueue(object : Callback<LoginResponse?> {
+                override fun onResponse(
+                    call: Call<LoginResponse?>,
+                    response: Response<LoginResponse?>
+                ) {
+                    MyFunction.cancelLoader()
+                    val loginResponse = response.body()
+                    if (loginResponse!!.success) {
+                        MyFunction.setSharedPrefs(context, Constant.isLoggedIn, true)
+
+                    } else {
+                        Toast.makeText(context, loginResponse!!.message, Toast.LENGTH_SHORT)
+                            .show()
+                        context?.startActivity(Intent(context, SigninActivity::class.java))
+                        (context as Activity).finish()
+                    }
+                }
+
+                override fun onFailure(call: Call<LoginResponse?>, t: Throwable) {
+                    MyFunction.cancelLoader()
+                    Toast.makeText(context, Constant.API_ERROR, Toast.LENGTH_SHORT).show()
+                }
+            })
+
+        }
+
+    }
+
 
     private fun initBottomNav() {
         // Set Home selected
@@ -200,7 +285,6 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
             val formatter = SimpleDateFormat("yyyy-MM-dd")
             val date = Date()
             val current_date = formatter.format(date)
-            Log.d("STEPS_COUNT",step_count.toString() +" - "+binding.kcal.text.toString() +" - "+current_date)
 
             MyFunction.showLoader(this)
             val call = APIClient.getClientWithoutToken().saveSteps(
@@ -219,6 +303,9 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
                         val body = response.body()
                         Toast.makeText(applicationContext, body!!.message, Toast.LENGTH_SHORT).show()
                         if (body.success) {
+                            PrefsHelper.remove("FSteps")
+                            finish()
+
                         }
                     } else {
                         Toast.makeText(applicationContext, response.toString(), Toast.LENGTH_SHORT).show()
@@ -296,15 +383,6 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
         super.onStart()
         checkLogin();
         StepsPercentage()
-        val url = Constant.BASE_URL + "getwalletbalance.html?"+session?.getData(Constant.ADDRESS)
-        var balance = ""
-        GlobalScope.launch(Dispatchers.IO) {
-            val doc = Jsoup.connect(url).get()
-            balance = doc.title()
-            binding.walletBalance.setText(balance)
-
-        }
-        updateWalletAddress();
 
 
     }
@@ -346,7 +424,7 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
 
     private fun StepsPercentage() {
         //MyFunction.showLoader(this)
-        val call = APIClient.getClientWithoutToken().stepsPercentage("1"
+        val call = APIClient.getClientWithoutToken().stepsPercentage(MyFunction.getSharedPrefs(applicationContext, Constant.USER_ID, ""),
 
         )
         call.enqueue(object : Callback<SaveStepsResponse?> {
@@ -359,6 +437,21 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
                     val body = response.body()
                     //Toast.makeText(applicationContext, body!!.message, Toast.LENGTH_SHORT).show()
                     if (body!!.success) {
+                        circularProgressBar.apply {
+                            // Set Progress
+                            var st : String = body.steps + "f"
+                            var p : Float = st.toFloat();
+                            progress = p
+                            // or with animation
+                            //setProgressWithAnimation(65f, 1000) // =1s
+
+                            // Set Progress Max
+                            //progressMax = 200f
+
+                            // Set ProgressBar Color
+                            progressBarColor = getResources().getColor(R.color.primary)
+                        }
+
                         binding.tvPercentage.setText(body!!.steps + "%")
                     }
                 } else {

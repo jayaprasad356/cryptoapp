@@ -2,6 +2,7 @@ package com.greymatter.sprint.api;
 
 import com.greymatter.sprint.model.StepHistory;
 import com.greymatter.sprint.model.response.LoginResponse;
+import com.greymatter.sprint.model.response.NotificationResponse;
 import com.greymatter.sprint.model.response.ProfileResponse;
 import com.greymatter.sprint.model.response.RegisterResponse;
 import com.greymatter.sprint.model.response.SaveStepsResponse;
@@ -99,6 +100,10 @@ public interface APIInterface {
     @POST("history.php")
     Call<StepHistoryResponse> getStepHistory(
             @Field(Constant.USER_ID) String user_id,@Field(Constant.MONTH) String month);
+    @FormUrlEncoded
+    @POST("notificationlist.php")
+    Call<NotificationResponse> getNotifications(
+            @Field(Constant.NOTIFY) String notify);
     @FormUrlEncoded
     @POST("wallet_history.php")
     Call<WalletHistoryResponse> getWalletHistory(
