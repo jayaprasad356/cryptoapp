@@ -14,6 +14,7 @@ public class Constant {
     public static final String ADDRESS = "address";
     public static String isDarkModeOn = "isDarkModeOn";
     public static final String BALANCE = "balance";
+    public static final String SETTINGS = "settings";
     public static String Rupees = "₹";
     public static final String SAVED_STEPS = "saved_steps";
     public static final String WEIGHT = "weight";

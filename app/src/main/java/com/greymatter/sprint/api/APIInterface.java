@@ -7,8 +7,10 @@ import com.greymatter.sprint.model.response.ProfileResponse;
 import com.greymatter.sprint.model.response.RegisterResponse;
 import com.greymatter.sprint.model.response.SaveStepsResponse;
 import com.greymatter.sprint.model.response.SendOtpResponse;
+import com.greymatter.sprint.model.response.SettingsResponse;
 import com.greymatter.sprint.model.response.StepHistoryResponse;
 import com.greymatter.sprint.model.response.StepsResponse;
+import com.greymatter.sprint.model.response.TSTResponse;
 import com.greymatter.sprint.model.response.WalletHistoryResponse;
 import com.greymatter.sprint.utils.Constant;
 
@@ -17,6 +19,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface APIInterface {
 
@@ -77,6 +80,11 @@ public interface APIInterface {
             @Field(Constant.AGE) String age);
 
     @FormUrlEncoded
+    @POST("appsettings.php")
+    Call<SettingsResponse> getSettings(
+            @Field(Constant.SETTINGS) String settings);
+
+    @FormUrlEncoded
     @POST("savestep.php")
     Call<SaveStepsResponse> saveSteps(
             @Field(Constant.USER_ID) String user_id,
@@ -108,6 +116,14 @@ public interface APIInterface {
     @POST("wallet_history.php")
     Call<WalletHistoryResponse> getWalletHistory(
             @Field(Constant.USER_ID) String user_id);
+
+    @POST("/api")
+    Call<TSTResponse> getTokenBalance(@Query("module") String module,
+                                      @Query("action") String action,
+                                      @Query("contractaddress") String contractaddress,
+                                      @Query("address") String address,
+                                      @Query("tag") String tag,
+                                      @Query("apikey") String apikey);
 
 
 }

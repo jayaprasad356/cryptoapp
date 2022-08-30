@@ -25,6 +25,9 @@
         android:theme="@style/Theme.Sprint"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".TestActivity"
+            android:exported="false" />
+        <activity
             android:name=".JsoupTestActivity"
             android:exported="false" />
         <activity

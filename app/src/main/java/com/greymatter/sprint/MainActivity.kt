@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.greymatter.sprint.api.APIClient
+import com.greymatter.sprint.api.APIInterface
 import com.greymatter.sprint.callback.StepsCallback
 import com.greymatter.sprint.databinding.ActivityMainBinding
 import com.greymatter.sprint.fragment.ChallengesActivity
@@ -26,6 +27,7 @@ import com.greymatter.sprint.helper.PrefsHelper
 import com.greymatter.sprint.model.response.LoginResponse
 import com.greymatter.sprint.model.response.SaveStepsResponse
 import com.greymatter.sprint.model.response.StepsResponse
+import com.greymatter.sprint.model.response.TSTResponse
 import com.greymatter.sprint.ui.NotificationActivity
 import com.greymatter.sprint.ui.SigninActivity
 import com.greymatter.sprint.utils.CalorieBurnedCalculator
@@ -39,12 +41,16 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -124,8 +130,9 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
+        getTSTBalance();
 
-        DataGrabber(applicationContext).execute()
+        //DataGrabber(applicationContext).execute()
     }
     class DataGrabber(applicationContext: Context) : AsyncTask<Void, Void, String>() {
         var context:Context? = applicationContext
@@ -202,6 +209,58 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
 
         }
 
+    }
+    private fun getTSTBalance() {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        val client: OkHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
+
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://api.bscscan.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+
+        val apiInterface = retrofit.create(APIInterface::class.java)
+
+
+        val call = apiInterface.getTokenBalance(
+            "account",
+            "tokenbalance",
+            "0x12Aa33065EDf46d41e42945046aAE8A6f5c1622F",
+            session?.getData(Constant.ADDRESS),
+            "latest",
+            "H1A6T1YG1RVX6A4MX7RUDCRTJRUCXR7QRY"
+        )
+        call.enqueue(object : Callback<TSTResponse?> {
+            override fun onResponse(call: Call<TSTResponse?>, response: Response<TSTResponse?>) {
+                MyFunction.cancelLoader()
+                val body = response.body()
+                if (body!!.status == "1") {
+                    var balancetsk = body!!.result
+                    balancetsk = balancetsk.substring(0, 5)
+                    session?.setData(
+                        Constant.BALANCE,
+                        balancetsk
+                    )
+                }
+                else{
+                    session?.setData(
+                        Constant.BALANCE,
+                        "0"
+                    )
+
+                }
+                updateWalletAddress()
+            }
+
+            override fun onFailure(call: Call<TSTResponse?>, t: Throwable) {
+                MyFunction.cancelLoader()
+                Toast.makeText(applicationContext, Constant.API_ERROR, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 
@@ -424,9 +483,10 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
 
     private fun StepsPercentage() {
         //MyFunction.showLoader(this)
-        val call = APIClient.getClientWithoutToken().stepsPercentage(MyFunction.getSharedPrefs(applicationContext, Constant.USER_ID, ""),
+        val call = APIClient.getClientWithoutToken().stepsPercentage(
+            MyFunction.getSharedPrefs(applicationContext, Constant.USER_ID, ""),
 
-        )
+            )
         call.enqueue(object : Callback<SaveStepsResponse?> {
             override fun onResponse(
                 call: Call<SaveStepsResponse?>,
