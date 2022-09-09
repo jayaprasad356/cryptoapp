@@ -240,7 +240,10 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
                 val body = response.body()
                 if (body!!.status == "1") {
                     var balancetsk = body!!.result
-                    balancetsk = balancetsk.substring(0, 5)
+                    try{
+                        balancetsk = balancetsk.substring(0, balancetsk.length - 18)
+                    }catch(e: Exception){
+                    }
                     session?.setData(
                         Constant.BALANCE,
                         balancetsk
@@ -253,12 +256,34 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
                     )
 
                 }
-                updateWalletAddress()
+
             }
 
             override fun onFailure(call: Call<TSTResponse?>, t: Throwable) {
                 MyFunction.cancelLoader()
                 Toast.makeText(applicationContext, Constant.API_ERROR, Toast.LENGTH_SHORT).show()
+            }
+        })
+        updateWalletAddress()
+        updateWallet()
+    }
+    private fun updateWallet() {
+        val call = APIClient.getClientWithoutToken().updateWallet(
+            MyFunction.getSharedPrefs(applicationContext, Constant.USER_ID, ""),
+            session!!.getData(Constant.BALANCE), session!!.getData(Constant.ADDRESS)
+        )
+        call.enqueue(object : Callback<LoginResponse?> {
+            override fun onResponse(
+                call: Call<LoginResponse?>,
+                response: Response<LoginResponse?>
+            ) {
+                val body = response.body()
+                //Toast.makeText(applicationContext, body!!.message, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(call: Call<LoginResponse?>, t: Throwable) {
+                MyFunction.cancelLoader()
+                //Toast.makeText(applicationContext, Constant.API_ERROR, Toast.LENGTH_SHORT).show()
             }
         })
     }

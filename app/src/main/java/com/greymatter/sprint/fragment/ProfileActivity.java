@@ -16,6 +16,7 @@ import com.greymatter.sprint.MainActivity;
 import com.greymatter.sprint.R;
 import com.greymatter.sprint.databinding.ActivityProfile2Binding;
 import com.greymatter.sprint.ui.ChangePasswordActivity;
+import com.greymatter.sprint.ui.NotificationActivity;
 import com.greymatter.sprint.ui.SplashActivity;
 import com.greymatter.sprint.ui.StepHistoryActivity;
 import com.greymatter.sprint.ui.WalletActivity;
@@ -46,6 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         binding.changePassword.setOnClickListener(view ->
                 startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class)));
+        binding.notification.setOnClickListener(view ->
+                startActivity(new Intent(getApplicationContext(), NotificationActivity.class)));
 
         binding.telegram1.setOnClickListener(view ->
                 openUrl(Constant.TELEGRAM1));
