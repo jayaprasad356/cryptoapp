@@ -402,9 +402,14 @@ class MainActivity : AppCompatActivity() ,StepsCallback{
                 }
             })
         } else {
-            Toast.makeText(applicationContext, "Step count must be greater than 0", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(applicationContext, "Step count must be greater than 0", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopService(Intent(applicationContext, StepDetectorService::class.java))
+
     }
 
     private fun getStepsListWeekly() {

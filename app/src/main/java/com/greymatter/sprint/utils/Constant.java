@@ -6,8 +6,7 @@ public class Constant {
 
     String TAG = Constant.class.getSimpleName();
     public static int SPLASH_DURATION = 3000;
-    public static String BASE_URL = "http://crypto.greymatterworks.in/api/";
-    //public static String BASE_URL = "http://192.168.43.38/cryptoapp/api/";
+    public static String BASE_URL = "https://thesprintapp.com/api/";
     public static String API_ERROR = "Something went wrong, please try again later!";
     public static final String EMPTY_ERROR = "Please fill in this field";
     public static final String isLoggedIn = "isLoggedIn";

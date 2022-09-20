@@ -74,7 +74,8 @@ public class SplashActivity extends AppCompatActivity {
                                     .setIcon(android.R.drawable.ic_dialog_alert)
                                     .show();
 
-                        }else {
+                        }
+                        else {
                             new AlertDialog.Builder(SplashActivity.this)
                                     .setTitle("New Update Availble ! ")
                                     .setMessage(settingsResponse.getData().get(0).getApp_description())
@@ -90,15 +91,9 @@ public class SplashActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             redirectApp();
-
-
                                         }
-                                    })
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .show();
+                                    }).setIcon(android.R.drawable.ic_dialog_alert).show();
                         }
-
-
                     }
 
                 }
